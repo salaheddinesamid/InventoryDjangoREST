@@ -9,26 +9,37 @@ class OrderProcessingService:
     @transaction.atomic()
     def process_order(validated_data):
         # Create new order
-        order = Order.objects.create()
-        # Initiate order items
-        order_items = []
+        order = Order.objects.create(
+            status="CREATED",
+            total_amount=0
+        )
+
         # Extract order items from the request
         items = validated_data['items']
         total_price = 0
 
         for item in items:
             try:
-                order_item = OrderItem.objects.create(
-                    quantity=0
-                )
-                product = Product.objects.get(id=item['product_id'])
+                # Fetch the product item:
+                try:
+                    product = Product.objects.select_for_update().get(id=item['product_id'])
+
+                except Product.DoesNotExist:
+                    raise ValueError(
+                        f"Product {item['product_id']} not found"
+                    )
+
                 # Update the product quantity
                 StockUpdateService.decrease_quantity(product.id, item['quantity'])
-
                 item_price = product.price * item['quantity']
 
-                order_item.product_id = product.id
-                order_item.price = item_price
+                # Create new order item object
+                OrderItem.objects.create(
+                    order=order,
+                    product=product,
+                    quantity=item['quantity'],
+
+                )
 
                 # Increase the order total price
                 total_price += item_price

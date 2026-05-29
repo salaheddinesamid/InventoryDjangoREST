@@ -83,7 +83,8 @@ class StockUpdateService:
 
         product = Product.objects.select_for_update().get(id=product_id)
 
-        product.quantity_available = 400
+        product.quantity_available += quantity
+
         product.save()
 
         return product
