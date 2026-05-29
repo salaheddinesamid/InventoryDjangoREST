@@ -17,7 +17,10 @@ from .serializers.ProductSerializer import ProductSerializer
 from .services.StockUpdateService import StockUpdateService
 from .services.ProductAdderService import ProductAdderService
 from .services.ProductRemoveService import ProductRemoveService
-from .security.JwtFilter import IsAdmin, IsAdminOrUser
+from config.security.permissions import IsAdmin, IsAdminOrUser
+import logging
+
+logger = logging.getLogger("app_logger")
 
 
 class LargeResultsSetPagination(PageNumberPagination):
@@ -33,6 +36,7 @@ class StandardResultsSetPagination(PageNumberPagination):
 
 
 class ProductList(ListAPIView):
+
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     pagination_class = LargeResultsSetPagination

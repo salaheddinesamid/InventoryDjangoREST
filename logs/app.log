@@ -1,0 +1,99 @@
+[2026-05-28 20:53:06,170] INFO django.utils.autoreload : Watching for file changes with StatReloader
+[2026-05-28 20:53:45,393] INFO django.utils.autoreload : /Users/salaheddine/PycharmProjects/config/stock/views.py changed, reloading.
+[2026-05-28 20:53:45,717] INFO django.utils.autoreload : Watching for file changes with StatReloader
+[2026-05-28 20:53:45,739] INFO app_logger : Incoming request/...
+[2026-05-28 20:53:49,205] INFO django.server : "GET /users HTTP/1.1" 301 0
+[2026-05-28 20:53:49,309] INFO django.server : "GET /users/ HTTP/1.1" 200 2468
+[2026-05-28 21:13:20,998] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 307
+[2026-05-28 21:13:32,512] WARNING django.request : Bad Request: /orders/
+[2026-05-28 21:13:32,513] WARNING django.server : "POST /orders/ HTTP/1.1" 400 30
+[2026-05-28 21:13:40,598] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 307
+[2026-05-28 21:15:53,307] WARNING django.request : Bad Request: /orders/
+[2026-05-28 21:15:53,308] WARNING django.server : "POST /orders/ HTTP/1.1" 400 30
+[2026-05-28 21:16:49,794] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 307
+[2026-05-28 21:16:50,758] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 307
+[2026-05-28 21:17:20,356] INFO django.utils.autoreload : /Users/salaheddine/PycharmProjects/config/stock/services/StockUpdateService.py changed, reloading.
+[2026-05-28 21:17:20,928] INFO django.utils.autoreload : Watching for file changes with StatReloader
+[2026-05-28 21:17:20,967] INFO app_logger : Incoming request/...
+[2026-05-28 21:17:25,193] INFO django.utils.autoreload : /Users/salaheddine/PycharmProjects/config/stock/services/StockUpdateService.py changed, reloading.
+[2026-05-28 21:17:25,567] INFO django.utils.autoreload : Watching for file changes with StatReloader
+[2026-05-28 21:17:25,595] INFO app_logger : Incoming request/...
+[2026-05-28 21:17:28,763] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 307
+[2026-05-28 21:17:31,839] INFO django.server : "POST /orders/ HTTP/1.1" 201 97
+[2026-05-28 21:17:39,058] INFO django.server : "POST /orders/ HTTP/1.1" 201 96
+[2026-05-28 21:17:41,649] WARNING django.request : Bad Request: /orders/
+[2026-05-28 21:17:41,650] WARNING django.server : "POST /orders/ HTTP/1.1" 400 30
+[2026-05-28 21:19:05,898] ERROR django.request : Internal Server Error: /orders/
+Traceback (most recent call last):
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/order/views.py", line 60, in delete
+    OrderCancellationService.cancel_order(
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/order/services/OrderCancellationService.py", line 25, in cancel_order
+    raise ValueError("The order has already been canceled")
+ValueError: The order has already been canceled
+[2026-05-28 21:19:05,906] ERROR django.server : "DELETE /orders/?order_id=1 HTTP/1.1" 500 94941
+[2026-05-28 21:19:15,944] INFO django.server : "GET /orders/ HTTP/1.1" 200 488
+[2026-05-28 21:19:21,228] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 305
+[2026-05-28 21:19:40,216] INFO django.server : "DELETE /orders/?order_id=7 HTTP/1.1" 200 0
+[2026-05-28 21:19:43,226] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 305
+[2026-05-28 21:19:45,584] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 305
+[2026-05-28 21:20:43,795] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 305
+[2026-05-28 21:20:44,676] INFO django.server : "GET /stock/get_all HTTP/1.1" 200 305
+[2026-05-28 21:20:49,438] ERROR django.request : Internal Server Error: /orders/
+Traceback (most recent call last):
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/salaheddine/PycharmProjects/config/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/order/views.py", line 60, in delete
+    OrderCancellationService.cancel_order(
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/salaheddine/PycharmProjects/config/order/services/OrderCancellationService.py", line 25, in cancel_order
+    raise ValueError("The order has already been canceled")
+ValueError: The order has already been canceled
+[2026-05-28 21:20:49,440] ERROR django.server : "DELETE /orders/?order_id=7 HTTP/1.1" 500 94941
+[2026-05-28 21:24:51,271] INFO django.utils.autoreload : /Users/salaheddine/PycharmProjects/config/config/settings/base.py changed, reloading.

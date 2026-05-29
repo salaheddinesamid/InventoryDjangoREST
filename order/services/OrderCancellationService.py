@@ -1,40 +1,32 @@
 from django.db import transaction
 from ..models import Order
 from stock.services.StockUpdateService import StockUpdateService
+import logging
+
+logger = logging.getLogger("app_logger")
 
 
 class OrderCancellationService:
 
     @staticmethod
-    @transaction.atomic
+    @transaction.atomic()
     def cancel_order(order_id):
-        """
 
-        :param order_id:
-        :return:
-        """
+        # 🔒 Lock order row to prevent concurrent cancellation
+        order = Order.objects.select_for_update().get(id=order_id)
 
-        # Fetch the order from the database:
-        order = Order.objects.get(id=order_id)
-
-        # Get the order items:
-        order_items = order.items.all()
-
-        # Check if the order is already cancelled:
         if order.status == "CANCELED":
-            raise ValueError("The order has already been canceled")
+            raise ValueError("Order already canceled")
 
-        # Iterate over order items:
+        order_items = order.items.select_related("product").all()
+
         for item in order_items:
-            product = item.product
-            # restore the product quantity
             StockUpdateService.restore_quantity(
-                product_id=product.id,
+                product_id=item.product.id,
                 quantity=item.quantity
             )
 
-        # Set the order status to 'CANCELED'
         order.status = "CANCELED"
         order.save()
 
-
+        return order

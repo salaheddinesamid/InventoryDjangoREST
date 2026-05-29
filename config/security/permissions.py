@@ -7,6 +7,7 @@ class HasRole(BasePermission):
 
     def has_permission(self, request, view):
 
+        # If the HTTP request does not have any authentication
         if not request.user.is_authenticated:
             return False
 
@@ -15,6 +16,7 @@ class HasRole(BasePermission):
             flat=True
         )
 
+        # Return if the user has at least of the allowed roles
         return any(role in user_roles for role in self.allowed_roles)
 
 

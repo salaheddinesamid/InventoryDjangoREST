@@ -11,6 +11,10 @@ from .serializers.NewOrderSerializer import OrderCreationSerializer
 from .services.OrderProcessingService import OrderProcessingService
 from .services.OrderCancellationService import OrderCancellationService
 
+import logging
+
+logger = logging.getLogger("app_logger")
+
 
 class OrderListView(APIView):
     """
@@ -56,12 +60,21 @@ class OrderListView(APIView):
             )
 
     def delete(self, request):
-        order_id = request.query_params.get('order_id')
-        OrderCancellationService.cancel_order(
-            order_id=order_id
-        )
+        try:
+            order_id = request.query_params.get('order_id')
+            logger.info("Incoming request/...")
+            OrderCancellationService.cancel_order(
+                order_id=order_id
+            )
 
-        return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_200_OK)
+        except ValueError as e:
+            return Response(
+                data={
+                    "error" : e.__str__()
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 
