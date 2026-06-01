@@ -11,6 +11,7 @@ class HasRole(BasePermission):
         if not request.user.is_authenticated:
             return False
 
+        # Extract use roles and authorities from the HTTP request
         user_roles = request.user.roles.values_list(
             'name',
             flat=True
