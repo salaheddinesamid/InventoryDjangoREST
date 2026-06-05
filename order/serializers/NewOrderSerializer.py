@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
 
-#
+# JSON serializer for order item
 class OrderItemCreateSerializer(serializers.Serializer):
     product_id = serializers.IntegerField()
     quantity = serializers.IntegerField()
 
 
-#
+# JSON serializer for order details
 class OrderCreationSerializer(serializers.Serializer):
     items = OrderItemCreateSerializer(
         many=True
