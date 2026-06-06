@@ -10,6 +10,14 @@ ENV PYTHONUNBUFFERED=1
 # Set up the working directory
 WORKDIR /app
 
+# Install system dependencies for mysqlclient
+RUN apt-get update && apt-get install -y \
+    gcc \
+    pkg-config \
+    default-libmysqlclient-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy the dependency files
 COPY requirements.txt .
 
