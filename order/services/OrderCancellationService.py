@@ -19,7 +19,8 @@ class OrderCancellationService:
             raise ValueError("Order already canceled")
 
         order_items = order.items.select_related("product").all()
-        print("Items to be restored:".format(order_items))
+        logger.info("Items to be restored:".format(order_items.__str__()))
+
 
         for item in order_items:
             StockUpdateService.restore_quantity(
