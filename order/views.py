@@ -11,6 +11,8 @@ from .serializers.NewOrderSerializer import OrderCreationSerializer
 from .services.OrderProcessingService import OrderProcessingService
 from .services.OrderCancellationService import OrderCancellationService
 
+from config.security.permissions import IsUser, IsAdmin
+
 import logging
 
 logger = logging.getLogger("app_logger")
@@ -21,6 +23,8 @@ class OrderListView(APIView):
         List all orders, or create a new order.
     """
 
+    permission_classes = [IsUser, IsAdmin]
+
     # List all orders in the DB
     def get(self, request):
         orders = Order.objects.all()
@@ -28,6 +32,10 @@ class OrderListView(APIView):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+
+        # Extract the user email
+        user_email = request.user.email
+
         serializer = OrderCreationSerializer(
             data=request.data
         )
@@ -40,7 +48,8 @@ class OrderListView(APIView):
 
         try:
             order = OrderProcessingService.process_order(
-                serializer.validated_data
+                serializer.validated_data,
+                user_email=user_email
             )
 
             response = OrderSerializer(order)
