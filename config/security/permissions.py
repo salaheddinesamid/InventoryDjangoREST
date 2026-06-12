@@ -26,7 +26,7 @@ class IsAdmin(HasRole):
 
 
 class IsUser(HasRole):
-    allowed_roles = ['User']
+    allowed_roles = ['USER']
 
 
 class IsAdminOrUser(HasRole):
