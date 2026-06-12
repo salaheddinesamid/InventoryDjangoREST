@@ -13,7 +13,7 @@ class HasRole(BasePermission):
 
         # Extract use roles and authorities from the HTTP request
         user_roles = request.user.roles.values_list(
-            'name',
+            'role_name',
             flat=True
         )
 
