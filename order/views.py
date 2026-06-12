@@ -10,6 +10,7 @@ from .serializers.OrderSerializer import OrderSerializer
 from .serializers.NewOrderSerializer import OrderCreationSerializer
 from .services.OrderProcessingService import OrderProcessingService
 from .services.OrderCancellationService import OrderCancellationService
+from config.security.permissions import IsUser
 
 import logging
 
@@ -20,6 +21,8 @@ class OrderListView(APIView):
     """
         List all orders, or create a new order.
     """
+
+    permission_classes = [IsUser]
 
     # List all orders in the DB
     def get(self, request):
